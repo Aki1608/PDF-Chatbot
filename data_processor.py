@@ -1,7 +1,9 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
 
-def process_pdf(pdf_path):
+def build_vector_database(pdf_path):
     print("Loading PDF.")
     loader = PyPDFLoader(pdf_path)
     pages = loader.load()
@@ -17,12 +19,15 @@ def process_pdf(pdf_path):
     chunks = text_splitter.split_documents(pages)
     print(f"Created {len(chunks)} text chunks.")
     
-    return chunks
+    print("Downloading free open-source embedding model...")
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    
+    print(f"Translating {len(chunks)} chunks into vectors and saving to FAISS...")
+    vectorstore = FAISS.from_documents(chunks, embeddings)
+
+    db_folder_name = "thesis_faiss_index"
+    vectorstore.save_local(db_folder_name)
+    print(f"Success! Database saved to the '{db_folder_name}' folder.")
 
 if __name__ == "__main__":
-    print("Getting chunks.")
-    my_chunks = process_pdf("Habit.pdf")
-
-    if my_chunks:
-        print("####### First chunk of the PDF. #########")
-        print(my_chunks[0].page_content)
+    build_vector_database("Habit.pdf")
