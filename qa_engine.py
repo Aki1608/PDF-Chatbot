@@ -16,7 +16,7 @@ def ask_chatbot(user_question):
     # Load the local database
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     vectorstore = FAISS.load_local("thesis_faiss_index", embeddings, allow_dangerous_deserialization=True)
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 10})
 
     # Connect to Groq's servers
     print("Connecting to Groq...")
