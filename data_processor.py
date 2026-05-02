@@ -30,4 +30,4 @@ def build_vector_database(pdf_path):
     print(f"Success! Database saved to the '{db_folder_name}' folder.")
 
 if __name__ == "__main__":
-    build_vector_database("Habit.pdf")
+    build_vector_database("Final_Thesis_KIT.pdf")
