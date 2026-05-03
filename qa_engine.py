@@ -22,7 +22,7 @@ def ask_chatbot(user_question):
     print("Connecting to Groq...")
     llm = ChatGroq(
         model="llama-3.1-8b-instant", # Using Meta's powerful Llama 3 model
-        temperature=0.2, 
+        temperature=0.2,
     )
 
     system_prompt = (
