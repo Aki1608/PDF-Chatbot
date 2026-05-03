@@ -23,32 +23,45 @@ A full-stack Retrieval-Augmented Generation (RAG) application that allows users 
 * `requirements.txt` - The exact list of dependencies needed to run the environment.
 * `my_thesis.pdf` - The source document the AI reads from.
 
-## Quick Start Guide
+## Getting Started
 
-### 1. Set Up the Environment
-It is highly recommended to run this inside a Virtual Environment to avoid dependency conflicts.
+### 1. Prerequisites
+* Python 3.10+
+* A free [Groq API Key](https://console.groq.com/keys)
+* A free [Hugging Face Access Token](https://huggingface.co/settings/tokens)
+
+### 2. Installation & Environment Setup
+It is highly recommended to run this project inside a Virtual Environment to avoid dependency conflicts.
 ```bash
+# Clone the repository and navigate into it
+git clone <your-repo-url>
+cd <your-repo-folder>
+
+# Create and activate a clean virtual environment
 python -m venv venv
-source venv/bin/activate
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+
+# Install the required architecture
 pip install -r requirements.txt
 ```
 
-### 2. Configure API Keys
-Create a `.env` file in the root directory of the project and add your API keys for Hugging Face and Groq:
+### 3. Configure API Keys
+Create a `.env` file in the root directory of the project. Do not commit this file to version control.
 ```env
+HUGGINGFACEHUB_API_TOKEN=your_huggingface_key_here
 GROQ_API_KEY=your_groq_key_here
 ```
 
-### 3. Build the Database
-Ensure your PDF (`Final_Thesis_KIT.pdf`) is in the main folder, then run the data processor to generate the local vector embeddings:
+### 4. Build the Local Database
+Place your target PDF in the root folder (ensure it is named `Final_Thesis_KIT.pdf` or update the script accordingly), and run the processor:
 ```bash
 python data_processor.py
 ```
 *(This will create a hidden folder named `thesis_faiss_index` containing your processed database).*
 
-### 4. Launch the Application
-Start the frontend web server:
+### 5. Launch the Web App
+Start the Gradio server:
 ```bash
 python app.py
 ```
-Click the local URL generated in the terminal (e.g., `http://127.0.0.1:7860`) to open the chat interface in your browser.
+Click the local URL generated in your terminal (e.g., `http://127.0.0.1:7860`) to start chatting.
