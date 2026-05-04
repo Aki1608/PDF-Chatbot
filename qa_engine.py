@@ -5,9 +5,9 @@ from langchain_community.vectorstores import FAISS
 from langchain_classic.chains import create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_groq import ChatGroq # <-- The New Engine!
+from langchain_groq import ChatGroq
 
-# Load your API keys
+# Load API keys
 load_dotenv()
 
 def ask_chatbot(user_question):
@@ -21,7 +21,7 @@ def ask_chatbot(user_question):
     # Connect to Groq's servers
     print("Connecting to Groq...")
     llm = ChatGroq(
-        model="llama-3.1-8b-instant", # Using Meta's powerful Llama 3 model
+        model="llama-3.1-8b-instant",
         temperature=0.2,
     )
 
